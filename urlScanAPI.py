@@ -3,8 +3,8 @@ import json
 import datetime
 import time
 
-# format: www.example.ab"
-domainName = "www.passeportformation.eu"
+# format: www.example.ab
+domainName = "www.impots.gouv.fr"
 
 ########################## GeoIP ##########################
 # need url
@@ -51,11 +51,11 @@ def virusTotalRetrieve():
                 print ("Last VirusTotal's report is older than "+str(threshold)+" month(s) ("+str(dateAnalysis))+"), will scan for a new one..."
                 virusTotalScan()
             else:
-                print ("Last VirusTotal's report is less than "+str(threshold)+" month(s) old ("+str(dateAnalysis)+")")
-                if reportJson["positives"]==0 :      # if there is no negative vote
-                    print ("\tAnalyse result: site is clean, suspected "+ str(reportJson["positives"]) + " time(s).")
+                print ("Last VirusTotal's report is less than "+str(threshold)+" month(s) ("+str(dateAnalysis)+")")
+                if reportJson["positives"]==0 :      # if there is no negative votes
+                    print ("\tAnalysis result: site is clean, suspected "+ str(reportJson["positives"]) + " time(s).")
                 else:
-                    print("\tAnalyse result: site is suspected " + str(reportJson["positives"]) + " time(s).")
+                    print("\tAnalysis result: site is suspected " + str(reportJson["positives"]) + " time(s).")
         else:
             print (domainName + " is not present in the dataset of VirusTotal")
     elif reportResponse.status_code == 204:
@@ -63,13 +63,13 @@ def virusTotalRetrieve():
 
 def virusTotalScan():
     #if report is old, scan for a new one (may take several minutes/hours before report is ready)
-    #after this, a retrieve report operation must be executed to retrieve it
+    #after that, a retrieve report operation must be executed to retrieve it
     params = {'apikey': apikey, 'url': domainName}
     virusTotalResponse = requests.post('https://www.virustotal.com/vtapi/v2/url/scan', data=params)
     if virusTotalResponse.status_code == 200:
         DataJson = virusTotalResponse.json()
         if DataJson["response_code"] == 1:
-            print("VirusTotal's report is ready, will be retrieved in 5 seconds...")
+            print("VirusTotal's report is ready and be retrieved in 5 seconds...")
             time.sleep(5)      #wait 5 sec
             virusTotalRetrieve()
         elif DataJson["response_code"] == -2:
@@ -82,7 +82,7 @@ def virusTotalScan():
         print("API requests exceeded ")
 
 
-#Launch
+#Launch (entrypoint)
 def main():
     geoIP()
 

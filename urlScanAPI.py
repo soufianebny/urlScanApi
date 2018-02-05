@@ -26,7 +26,7 @@ def geoIP():
 ###################### VirusTotal #########################
 #need url and apikey
 ###########################################################
-apikey = 'your_apikey_here'
+apikey = 'YOUR_APIKEY_HERE'
 
 """
 response types:

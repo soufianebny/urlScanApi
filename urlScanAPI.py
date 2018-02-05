@@ -26,12 +26,9 @@ def geoIP():
 ###################### VirusTotal #########################
 #need url and apikey
 ###########################################################
-apikey = 'faced81f396711bc4706b31392a40c0d7f3ffbc01d13e521b9e48ed9c7879da6'
+apikey = 'your_apikey_here'
 
-"""virusTotal account:
-zepufeho@ugimail.net
-pass: zepufeho@ugimail.netzepufeho@ugimail.net
-
+"""
 response types:
 response_code = 0 : url is not present in the dataset of VirusTotal
 response_code = -2 : url is still queued for analysis 

@@ -1,7 +1,7 @@
 import requests, json, datetime, time, math
 
 # format: www.example.ab
-domainName = "www.www.impots.gouv.fr"
+domainName = "www.impots.gouv.fr"
 
 ########################## GeoIP ##########################
 # need url

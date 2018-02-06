@@ -1,7 +1,7 @@
 import requests, json, datetime, time, math
 
 # format: www.example.ab
-domainName = "www.impots.gouv.fr"
+domainName = "www.anime-vostfr.fr"
 
 ########################## GeoIP ##########################
 # need url
@@ -18,12 +18,12 @@ def geoIP():
         else:
             print("GeoIP result: "+domainName+" is not based in France")
     else:
-        print("Error, status code = "+str(geoResponse.status_code))
+        print("GeoIP Error, status code = "+str(geoResponse.status_code))
 
 ###################### VirusTotal #########################
 #need url and apikey
 ###########################################################
-apikey = 'YOUR_APIKEY_HERE'
+apikey = 'faced81f396711bc4706b31392a40c0d7f3ffbc01d13e521b9e48ed9c7879da6'
 
 """
 response types:

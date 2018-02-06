@@ -1,7 +1,7 @@
 import requests, json, datetime, time, math
 
 # format: www.example.ab
-domainName = "www.sekoia.fr"
+domainName = "www.www.impots.gouv.fr"
 
 ########################## GeoIP ##########################
 # need url
@@ -23,7 +23,7 @@ def geoIP():
 ###################### VirusTotal #########################
 #need url and apikey
 ###########################################################
-apikey = 'faced81f396711bc4706b31392a40c0d7f3ffbc01d13e521b9e48ed9c7879da6'
+apikey = 'YOUR_APIKEY_HERE'
 
 """
 response types:

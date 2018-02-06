@@ -1,10 +1,7 @@
-import requests
-import json
-import datetime
-import time
+import requests, json, datetime, time, math
 
 # format: www.example.ab
-domainName = "www.impots.gouv.fr"
+domainName = "www.sekoia.fr"
 
 ########################## GeoIP ##########################
 # need url
@@ -21,18 +18,22 @@ def geoIP():
         else:
             print("GeoIP result: "+domainName+" is not based in France")
     else:
-        geoResponse.raise_for_status()
+        print("Error, status code = "+str(geoResponse.status_code))
 
 ###################### VirusTotal #########################
 #need url and apikey
 ###########################################################
-apikey = 'YOUR_APIKEY_HERE'
+apikey = 'faced81f396711bc4706b31392a40c0d7f3ffbc01d13e521b9e48ed9c7879da6'
 
 """
 response types:
 response_code = 0 : url is not present in the dataset of VirusTotal
 response_code = -2 : url is still queued for analysis 
 response_code = 1 : url report could be retrieved 
+
+status code:
+200: ok
+204: quota exceeded
 """
 
 def virusTotalRetrieve():
@@ -47,7 +48,7 @@ def virusTotalRetrieve():
             #today date:
             dateToday = datetime.datetime.now().date()
             threshold = str(1)       #threshold in months
-            if str(dateToday - dateAnalysis) >= threshold:   #test if report is >= threshold
+            if str(math.fabs(dateToday.month - dateAnalysis.month)) >= threshold:   #test only months
                 print ("Last VirusTotal's report is older than "+str(threshold)+" month(s) ("+str(dateAnalysis))+"), will scan for a new one..."
                 virusTotalScan()
             else:
@@ -59,7 +60,7 @@ def virusTotalRetrieve():
         else:
             print (domainName + " is not present in the dataset of VirusTotal")
     elif reportResponse.status_code == 204:
-        print("API requests exceeded ")
+        print("API requests exceeded")
 
 def virusTotalScan():
     #if report is old, scan for a new one (may take several minutes/hours before report is ready)
@@ -79,7 +80,7 @@ def virusTotalScan():
         elif DataJson["response_code"] == 0:
             print(domainName + " is not present in the dataset of VirusTotal")
     elif virusTotalResponse.status_code == 204:
-        print("API requests exceeded ")
+        print("API requests exceeded")
 
 
 #Launch (entrypoint)
